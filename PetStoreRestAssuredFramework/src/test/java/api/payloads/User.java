@@ -2,38 +2,38 @@ package api.payloads;
 
 public class User {
 	
-	int ID;
-	String userName;
-	String firstName;
-	String lastName;
+	int id;
+	String username;
+	String firstname;
+	String lastname;
 	String email;
 	String password;
 	String phone;
 	int userStatus=0;
 
 		public int getID() {
-		return ID;
+		return id;
 	}
-	public void setID(int iD) {
-		ID = iD;
+	public void setID(int id) {
+		id = id;
 	}
 	public String getUserName() {
-		return userName;
+		return username;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUserName(String username) {
+		this.username = username;
 	}
 	public String getFirstName() {
-		return firstName;
+		return firstname;
 	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setFirstName(String firstname) {
+		this.firstname = firstname;
 	}
 	public String getLastName() {
-		return lastName;
+		return lastname;
 	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setLastName(String lastname) {
+		this.lastname = lastname;
 	}
 	public String getEmail() {
 		return email;
