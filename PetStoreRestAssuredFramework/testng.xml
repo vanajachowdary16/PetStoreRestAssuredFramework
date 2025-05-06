@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Suite">
+<listerners>
+  <listerner class-name="api.utilities.ExtentReportManager" >
+  </listerner>
+</listerners>
+  <test thread-count="5" name="Test">
+    <classes>
+      <class name="api.test.DataDrivenTest"/>
+      <class name="api.test.UserTest"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

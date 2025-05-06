@@ -1,5 +1,7 @@
 package api.test;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -11,6 +13,8 @@ import api.payloads.User;
 import io.restassured.response.Response;
 
 public class UserTest {
+	
+	public Logger logger;
 	
 	Faker faker;
 	User userPayload;
@@ -27,10 +31,14 @@ public class UserTest {
 		userPayload.setEmail(faker.internet().safeEmailAddress());
 		userPayload.setPassword(faker.internet().password(5,10));
 		userPayload.setPhone(faker.phoneNumber().cellPhone());
+		
+		logger = LogManager.getLogger(this.getClass());
 	}
 	
 	@Test(priority=1)
 	public void testPostUser() {
+		
+		logger.info("********Creating the user*******");
 		
 		Response response =UserEndpoints.createUser(userPayload);
 		
@@ -39,12 +47,13 @@ public class UserTest {
 		Assert.assertEquals(response.getStatusCode(), 200);
 		System.out.println("Created Username: " + userPayload.getUserName());
 		
-		
+		logger.info("User is created");
 	}
 	
 	
 	@Test(priority=2, dependsOnMethods = {"testPostUser"})
-	public void testGetUserByName() {
+	public void testGetUserByName() throws InterruptedException {
+		Thread.sleep(2000);
 		
 		Response response = UserEndpoints.readUser(this.userPayload.getUserName());
 		response.then().log().body();
@@ -54,8 +63,9 @@ public class UserTest {
 	
 	
 	@Test(priority=3)
-	public void testUpdateUserByName() {
+	public void testUpdateUserByName() throws InterruptedException {
 		//update data using Payload
+		Thread.sleep(2000);
 		
 		userPayload.setFirstName(faker.name().firstName());
 		userPayload.setLastName(faker.name().lastName());
@@ -73,7 +83,8 @@ public class UserTest {
 	}
 	
 	@Test(priority=4)
-	public void testDeleteUserByName() {
+	public void testDeleteUserByName() throws InterruptedException {
+		Thread.sleep(2000);
 		
 		Response response =UserEndpoints.deleteUser(this.userPayload.getUserName());
 		Assert.assertEquals(response.getStatusCode(), 200);
